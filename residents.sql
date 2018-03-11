@@ -109,6 +109,19 @@ ADD COLUMN rainfall integer DEFAULT 0;
 
 UPDATE temperatures
 SET rainfall = ((high + low) / 2) - 35
-WHERE temperatur > 35;
+WHERE ((high + low) / 2) > 35;
 
 -- 8. A decision has been made to store rainfall data in inches. Write the SQL statements required to modify the rainfall column to reflect these new requirements.
+
+ALTER TABLE temperatures
+ALTER COLUMN rainfall
+TYPE numeric(5, 3);
+
+-- currently, the column stores integers. now, we need it to store numeric.
+
+UPDATE temperatures
+SET rainfall = rainfall * 0.039;
+
+-- # store the database in a file weather
+
+pg_dump test > test_dump.sql

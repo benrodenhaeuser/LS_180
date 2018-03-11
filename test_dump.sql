@@ -35,106 +35,55 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: birds; Type: TABLE; Schema: public; Owner: rodenhaeuser
+-- Name: employees; Type: TABLE; Schema: public; Owner: rodenhaeuser
 --
 
-CREATE TABLE birds (
-    name text,
-    length numeric(3,1),
-    wingspan numeric(3,1),
-    family text,
-    extinct boolean
+CREATE TABLE employees (
+    first_name character varying(100),
+    last_name character varying(100),
+    department character varying(100) DEFAULT 'unassigned'::character varying NOT NULL,
+    vacation_remaining integer DEFAULT 0 NOT NULL
 );
 
 
-ALTER TABLE birds OWNER TO rodenhaeuser;
+ALTER TABLE employees OWNER TO rodenhaeuser;
 
 --
--- Name: films; Type: TABLE; Schema: public; Owner: rodenhaeuser
+-- Name: weather; Type: TABLE; Schema: public; Owner: rodenhaeuser
 --
 
-CREATE TABLE films (
-    title character varying(255),
-    year integer,
-    genre character varying(100),
-    director text,
-    duraction integer
+CREATE TABLE weather (
+    date date NOT NULL,
+    low integer NOT NULL,
+    high integer NOT NULL,
+    rainfall numeric(5,3) DEFAULT 0
 );
 
 
-ALTER TABLE films OWNER TO rodenhaeuser;
+ALTER TABLE weather OWNER TO rodenhaeuser;
 
 --
--- Name: menu_items; Type: TABLE; Schema: public; Owner: rodenhaeuser
+-- Data for Name: employees; Type: TABLE DATA; Schema: public; Owner: rodenhaeuser
 --
 
-CREATE TABLE menu_items (
-    item text,
-    prep_time integer,
-    ingredient_cost numeric(4,2),
-    sales integer,
-    menu_price numeric(4,2)
-);
-
-
-ALTER TABLE menu_items OWNER TO rodenhaeuser;
-
---
--- Name: people; Type: TABLE; Schema: public; Owner: rodenhaeuser
---
-
-CREATE TABLE people (
-    name text,
-    age integer,
-    occupation text
-);
-
-
-ALTER TABLE people OWNER TO rodenhaeuser;
-
---
--- Data for Name: birds; Type: TABLE DATA; Schema: public; Owner: rodenhaeuser
---
-
-COPY birds (name, length, wingspan, family, extinct) FROM stdin;
-Spotted Towhee	21.6	26.7	Emberizidae	f
-American Robin	25.5	36.0	Turdidae	f
-Greater Koa Finch	19.0	24.0	Fringilidae	t
-Carolina Parakeet	33.0	55.8	Psittacidae	t
-Common Kestrel	35.5	73.5	Falconidae	f
+COPY employees (first_name, last_name, department, vacation_remaining) FROM stdin;
 \.
 
 
 --
--- Data for Name: films; Type: TABLE DATA; Schema: public; Owner: rodenhaeuser
+-- Data for Name: weather; Type: TABLE DATA; Schema: public; Owner: rodenhaeuser
 --
 
-COPY films (title, year, genre, director, duraction) FROM stdin;
-Die Hard	1988	action	\N	\N
-Casablanca	1942	drama	\N	\N
-The Conversation	1974	thriller	\N	\N
-\.
-
-
---
--- Data for Name: menu_items; Type: TABLE DATA; Schema: public; Owner: rodenhaeuser
---
-
-COPY menu_items (item, prep_time, ingredient_cost, sales, menu_price) FROM stdin;
-omelette	10	1.50	182	7.99
-tacos	5	2.00	254	8.99
-oatmeal	1	0.50	79	5.99
-\.
-
-
---
--- Data for Name: people; Type: TABLE DATA; Schema: public; Owner: rodenhaeuser
---
-
-COPY people (name, age, occupation) FROM stdin;
-Abby	34	biologist
-Mu'nisah	26	\N
-Mirabelle	40	contractor
+COPY weather (date, low, high, rainfall) FROM stdin;
+2016-03-07	29	32	0.000
+2016-03-08	23	31	0.000
+2016-03-09	17	28	0.000
+2016-03-01	34	43	0.117
+2016-03-02	32	44	0.117
+2016-03-03	31	47	0.156
+2016-03-04	33	42	0.078
+2016-03-05	39	46	0.273
+2016-03-06	32	43	0.078
 \.
 
 
